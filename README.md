@@ -1,4 +1,18 @@
-# Intro to Flask: Deliverables
+# Intro to Flask
+
+## SWBATs
+
+- [ ] Understand how the Internet works
+- [ ] Understand how the request-response cycle works
+- [ ] Understand HTTP protocols
+- [ ] Intialize a Flask application
+- [ ] Understand how to use SQLAlchemy within Flask
+- [ ] Use Flask routing and create views
+- [ ] Use the Flask shell 
+
+---
+
+## Deliverables
 
 ### 1. In `models.py` create a Production Model 
 #### - Use the tablename `productions`
