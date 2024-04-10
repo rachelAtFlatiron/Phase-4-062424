@@ -233,13 +233,6 @@ api/v2/pokemon/ditto - path
 
 ---
 
-## Why SQL-Alchemy 
-
-- Flask does not have a built in database abstraction layer (ORM)
-- SQL-Alchemy is an extension that Flask can use to include an ORM
-
----
-
 ## Initializing a Flask App
 
 ```python
@@ -247,42 +240,6 @@ app = Flask('mynameiswhat')
 ```
 
 That's it!
-
----
-
-## Connecting Flask with SQLAlchemy
-
-1. configure the database path you want a connection with
-- database path is referred to as URI = Uniform Resource Identifier
-```python
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///path/to/db.db'
-```
-2. configure whether SQLAlchemy should track modifications to objects (inserts, updates, etc.)
-```python
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-```
-- this will use less memory
-- we may get an error if we don't have this set
-
-3. create an instance of the db 
-```python
-db = SQLALchemy(app)
-```
-
----
-
-## Flask-SQLAlchemy [Configuration Keys](https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/)
-
-- There are a few other configuration keys such as...
-<br />
-
-`SQLALCHEMY_RECORD_QUERIES`: setting to record queries
-<br />
-
-`SQLALCHEMY_POOL_TIMEOUT`: speicfies connection timeout in seconds
-<br />
-
-`SQLALCHEMY_ECHO`: SQLAlchemy will log all errors if set to True
 
 ---
 
