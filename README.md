@@ -20,15 +20,15 @@
 
 ***
 
-## 1: Intro to Flask
+## 1: Intro to Flask and Flask-SQLAlchemy
 ### SWBATs:
 - [ ] Understand how the Internet works
 - [ ] Understand how the request-response cycle works
 - [ ] Understand HTTP protocols
 - [ ] Intialize a Flask application
 - [ ] Understand how to use SQLAlchemy within Flask
+- [ ] Use Flask-SQLAlchemy to define and initialize a database
 - [ ] Use Flask routing and create views
-- [ ] Use the Flask shell 
 
 ***
 
