@@ -233,6 +233,13 @@ api/v2/pokemon/ditto - path
 
 ---
 
+## Why SQL-Alchemy 
+
+- Flask does not have a built in database abstraction layer (ORM)
+- SQL-Alchemy is an extension that Flask can use to include an ORM
+
+---
+
 ## Initializing a Flask App
 
 ```python

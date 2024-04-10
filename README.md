@@ -7,8 +7,8 @@
 - [ ] Understand HTTP protocols
 - [ ] Intialize a Flask application
 - [ ] Understand how to use SQLAlchemy within Flask
+- [ ] Use Flask-SQLAlchemy to define and initialize a database
 - [ ] Use Flask routing and create views
-- [ ] Use the Flask shell 
 
 ---
 
