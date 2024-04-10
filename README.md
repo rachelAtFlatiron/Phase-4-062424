@@ -34,7 +34,7 @@
 
 ## 2: Flask Routes
 ### SWBATs:
-- [ ] Build and execute a GET, POST, PATCH, DELETE request
+- [ ] Build and execute a GET, POST request
 - [ ] Use Postman to interact with Flask
 - [ ] Use serializers
 
@@ -64,22 +64,11 @@
 
 ***
 
-## 6: Authentication pt1
+## 6: Authentication
 ### SWBATs:
 - [ ] Discuss the importance of authentication in web apps
 - [ ] Explain the difference between authentication and authorization
 - [ ] Discuss the relationship between cookies and sessions
 - [ ] Use token-based authentication using cookies and sessions
-
-*** 
-
-## 7: Authentication pt 2
-### SWBATs:
 - [ ] Use authorization 
 - [ ] Handle authorization errors on the front end 
-
-***
-
-## 8: Deployment
-### SWBATs:
-- [ ] Deploy an app using [Render](https://render.com/)
