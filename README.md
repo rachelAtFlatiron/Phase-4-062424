@@ -9,12 +9,13 @@
 
 | Lecture | Videos | Starter | Solution |
 | ------- | ------ | ------- | -------- |
-| 1. Intro To Flask and Flask-SQLAlchemy | Video | Starter | Solution |
-| 2. Flask Routes | Video | Starter | Solution |
-| 3. Rest APIs with Flask | Video | Starter | Solution | 
-| 4. Exceptions and Validations  | Video | Starter | Solution |
-| 5. Client Server Communication  | Video | Starter | Solution |
-| 6. Auth | Video | Starter | Solution |
+| 1. Intro To Flask | Video | Starter | Solution |
+| 2. Flask-SQLAlchemy | Video | Starter | Solution |
+| 3. Flask Routes | Video | Starter | Solution |
+| 4. Rest APIs with Flask | Video | Starter | Solution | 
+| 5. Exceptions and Validations  | Video | Starter | Solution |
+| 6. Client Server Communication  | Video | Starter | Solution |
+| 7. Auth | Video | Starter | Solution |
 
 ***
 
