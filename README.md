@@ -11,15 +11,16 @@
 | ------- | ------ | ------- | -------- |
 | 1. Intro To Flask | Video | Starter | Solution |
 | 2. Flask-SQLAlchemy | Video | Starter | Solution |
-| 3. Flask Routes | Video | Starter | Solution |
-| 4. Rest APIs with Flask | Video | Starter | Solution | 
-| 5. Exceptions and Validations  | Video | Starter | Solution |
-| 6. Client Server Communication  | Video | Starter | Solution |
-| 7. Auth | Video | Starter | Solution |
+| 3. SQLAlchemy Relationships | Video | Starter | Solution |
+| 4. Flask Routes | Video | Starter | Solution |
+| 5. Rest APIs with Flask | Video | Starter | Solution | 
+| 6. Exceptions and Validations  | Video | Starter | Solution |
+| 7. Client Server Communication  | Video | Starter | Solution |
+| 8. Auth | Video | Starter | Solution |
 
 ***
 
-## 1: Intro to Flask and Flask-SQLAlchemy
+## 1: Intro to Flask
 ### SWBATs:
 - [ ] Understand how the Internet works
 - [ ] Understand how the request-response cycle works
