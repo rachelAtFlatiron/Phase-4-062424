@@ -10,7 +10,9 @@ title: '01_intro_flask'
 
 ## What We'll Be Doing
 
-- Using Flask to create a REST API
+- Reviewing how the web works
+- Reviewing the request response cycle
+- Setting up a simple flask instance 
 
 <aside class="notes">
 - front-end communicate with back-end <br />
@@ -53,6 +55,8 @@ Fun Fact: ARPANET was the initial backbone of the internet which was created by 
 
 <aside class="notes">
 - sessions usually expire over a certain period of time <br />
+- sessions can be server side for large web apps, client side for smaller web apps 
+<br />
 What is a protocol? A set of rules on how something should be done.
 HTTP is the protocol describing the structure between client and server communication 
 </aside>
@@ -66,12 +70,18 @@ HTTP is the protocol describing the structure between client and server communic
 - SSL (secure sockets layer)
 - IMAP (internet message access protocol)
 - DNS (domain name system) 
+- TLS (transport layer security)
 etc ... 
 
 <aside class="notes">
+- convential internet communications (http) data is transmitted in plaintext and will be readable if intercepted
+<br />
 - ssl: establishes encrypted link between server and client <br />
 - imap: stores emails on a mail server  <br />
-- dns: domain names database - this is why hosting a website and hosting the domain name happen in two different places
+<br />
+- tls: the little lock next to the URL that makes the website secure
+<br />
+- dns: domain names database - this is why hosting a website and hosting the domain name happen in two different places, without dns you would have to memorize the IP address (bring up the localhost is just 127.0.0)
 </aside>
 
 ---
@@ -82,7 +92,7 @@ etc ...
 
 <img src="https://rochester.kidsoutandabout.com/sites/default/files/html_css_javascript.jpeg" width="600px" />
 
-- dynamic software content is supplied by server.  a user makes a request, and the server sends back a response
+- dynamic software content is supplied by server.  a user makes a request, and the server processes the information and sends back a response
 
 <aside class="notes">
 - websites (single domain pages on the web) <br />
@@ -177,6 +187,7 @@ api/v2/pokemon/ditto - path
 <aside class="notes">
 - CRUD: for backend databases, primitive
 - HTTP/REST: method sent along with request, APIs
+- We will be focusing on GET/POST/PATCH/DELETE
 </aside>
 
 ---
@@ -190,6 +201,7 @@ api/v2/pokemon/ditto - path
 <aside class="notes">
 - It’s a format to transfer data from client to server <br />
 - sometimes have to specify you will be sending JSON or expecting JSON
+- maybe show them postman at this time
 </aside>
 
 ---
@@ -225,6 +237,8 @@ api/v2/pokemon/ditto - path
 - WSGI <br />
     - interface between web servers (Apache, Nginx, local development server) and web apps <br />
     - specifically for Python frameworks <br />
+    - to make sure the coder doesn't have to design new applications around each server <br />
+    
 - Werkzeug:  <br />
 - toolkit that implements requests, response objects and other utility functions <br />
     - debugger, classes to build requests and process responses, routing, making dev server <br />
@@ -236,6 +250,8 @@ api/v2/pokemon/ditto - path
 ## Initializing a Flask App
 
 ```python
+from flask import Flask 
+
 app = Flask('mynameiswhat')
 ```
 
@@ -254,12 +270,23 @@ def home():
         return {} 
 ```
 
+<aside class="notes">
+
+- we will not be using Flask views, we will be using React 
+</aside>
+
 ---
 
 ## What do we send back?
 
 ### 🌈 JSON ✨
-- We can add additional information to our response such as headers, status code, etc. with `make_response()`
+- We can add additional information to our response such as headers, status code, etc. with `make_response()` or with `return`
+
+<aside class="notes">
+
+ - with return you return [message], [status code], [headers] <br />
+ - with make_response(response_body, status_code, headers) you return an object...cleaner, easier to replicate, and potentially automate
+</aside>
 
 ---
 
@@ -280,7 +307,7 @@ def run_before():
 
 ## Context
 
-- Application Context: Keeps track of current app's config variables, logger, database connections so that we don't have to pass the entire application instance from function to function
+- Application Context: Keeps track of current app's config variables, logger, database connections so that we don't have to pass the entire application instance (`app`) from function to function
 
 ```python
     with app.app_context():

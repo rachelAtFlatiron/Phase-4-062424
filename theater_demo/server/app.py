@@ -6,6 +6,7 @@
 # 1a. Set Up Imports
 from flask import Flask, request, jsonify, make_response 
 
+
 # 1b. Create instance of Flask
 app = Flask(__name__)
 
@@ -31,6 +32,18 @@ def get_longest_movies():
     }
     return make_response(jsonify(prod), 200)
 
+# https://www.adamsmith.haus/python/docs/flask.jsonify
+# 🛑 you may see on internet - jsonify automatically puts application/json mimetype ... arguments are same as dict constructor
+# https://www.adamsmith.haus/python/docs/flask.make_response
+# 🛑 make_response is for the default views and setting headers in those views
+
+# 🛑 for responses:
+# return...doesn't turn the reponse into an object
+# jsonify...creates a response object and autmomatically sets correct headers for JSON
+# json.dumps...converts Python object into JSON-formatted string
+# make_response...helpful mostly for flask views and needing to include headers with those views
+# can also make a response object directly resp=Response()
+
 # 4. Create a dynamic route
 # 4a. Use the route decorator
 @app.route('/productions/<string:title>')
@@ -41,10 +54,6 @@ def production(title):
         "genere": title,
         "length": 3
     }
-
-    # 📚 Review With Students: status codes
-    # 🛑 `make_response` will allow us to make a response object with the response body and status code
-    # 🛑 `jsonify` will convert our query into JSON
 
     # 4b. Return result as JSON
     return make_response(
