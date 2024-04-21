@@ -15,7 +15,6 @@
 | 4. Rest APIs with Flask | Video | Starter | Solution | 
 | 5. Exceptions and Validations  | Video | Starter | Solution |
 | 6. Client Server Communication  | Video | Starter | Solution |
-| 7. Auth | Video | Starter | Solution |
 
 ***
 
