@@ -51,5 +51,3 @@ class Role(db.Model, SerializerMixin):
 
     # 8b. Add serializer rules to avoid max recursion -> [You Do] app.py to write routes for Roles
     serialize_rules = ('-created_at', '-updated_at', '-production.roles')
-
-    
