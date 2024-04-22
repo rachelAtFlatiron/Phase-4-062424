@@ -1,26 +1,26 @@
 # handle creating the api and connecting the database 
 # and enabling alembic/migrations
 
-# 1. Navigate to `models.py`
+# ✅ 1. Navigate to `models.py`
 
-# 2a. Set Up Imports
+# ✅ 2a. Set Up Imports
 from flask import Flask, request, jsonify, make_response 
 from flask_migrate import Migrate 
 from models import db, Production
 
-# 2b. Create instance of Flask
+# ✅ 2b. Create instance of Flask
 app = Flask(__name__)
-# 2c. Configure the flask app to connect to a database
+# ✅ 2c. Configure the flask app to connect to a database
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///app.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False 
 
-# 2d. Enable Flask-Migrate's Alembic by using `Migrate`
+# ✅ 2d. Enable Flask-Migrate's Alembic by using `Migrate`
 migrate = Migrate(app, db)
 
-# 2e. Connect the database to the app
+# ✅ 2e. Connect the database to the app
 db.init_app(app)
 
-# 3. Migrate the Production model using Flask-Migrate's Alembic
+# ✅ 3. Migrate the Production model using Flask-Migrate's Alembic
 
 # export FLASK_APP=app.py
 # export FLASK_RUN_PORT=5555
@@ -30,16 +30,16 @@ db.init_app(app)
 # flask db upgrade
 
 
-# 4. Navigate to `seed.rb`
+# ✅ 4. Navigate to `seed.rb`
 
-#6. Create a path to retrieve the first 5 longest movies
-# 6a. Import jsonify, make_response
-# 6b. Use the `route` decorator
+# ✅ 6. Create a path to retrieve the first 5 longest movies
+# ✅ 6a. Import jsonify, make_response
+# ✅ 6b. Use the `route` decorator
 @app.route('/longest-movies')
 def get_longest_movies():
-    # 6c. Query for longest movie
+    # ✅ 6c. Query for longest movie
     q = Production.query.order_by(Production.length.desc()).limit(1)
-    # 6d. Jsonify and return the response
+    # ✅ 6d. Jsonify and return the response
     prod = {
         "title": q[0].title,
         "genre": q[0].genre,
@@ -47,10 +47,10 @@ def get_longest_movies():
     }
     return make_response(jsonify(prod), 200)
 
-# 7. Create a dynamic route
-# 7a. Use the route decorator
+# ✅ 7. Create a dynamic route
+# ✅ 7a. Use the route decorator
 @app.route('/productions/<string:title>')
-# 7b. Create productions() to filter through db
+# ✅ 7b. Create productions() to filter through db
 # 🛑 First run in browser and view the title as response just to show that its working
 def production(title):
     q = Production.query.filter_by(title=title).first()
@@ -64,11 +64,30 @@ def production(title):
     # 🛑 `make_response` will allow us to make a response object with the response body and status code
     # 🛑 `jsonify` will convert our query into JSON
 
-    # 7c. Return result as JSON
+    # ✅ 7c. Return result as JSON
     return make_response(
         jsonify(production_response),
         200
     )
+
+# ✅ 8. Create a route `/all-productions` to see all productions
+@app.route('/all-productions')
+def all_productions():
+    q = Production.query.all()
+    # 🛑 Loop through the query and convert each object into a dictionary
+    
+    # prod_list = []
+    # for p in q:
+    #     prod_list.append({
+    #         "title": p.title,
+    #         "director": p.director,
+    #         "length": p.length
+    #     })
+    
+    # ✅ 8a. use SerializerMixin's .to_dict() for responses here and everywhere
+    prod_list = [p.to_dict() for p in q]
+    res = make_response(jsonify(prod_list), 200)
+    return res 
 
 # Note: If you'd like to run the application as a script instead of using `flask run`, uncomment the line below 
 # and run `python app.py`

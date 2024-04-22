@@ -80,3 +80,8 @@
 #### 7c. Return the result as json
 
 <br />
+
+
+### 8. Create a route `/all-productions` to see all productions
+#### 8a. Use `serializerMixin` to convert to dictionaries
+#### 8b. Use serializer rules to remove `created_at` and `updated_at`

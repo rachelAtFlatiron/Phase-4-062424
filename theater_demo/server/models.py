@@ -2,10 +2,11 @@
 
 #SQLAlchemy import
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 # 1. ✅ Create a Production Model
-class Production(db.Model):
+class Production(db.Model, SerializerMixin):
     __tablename__ = "productions"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -22,4 +23,6 @@ class Production(db.Model):
     description = db.Column(db.String) 
     composer = db.Column(db.String)
 
-# 2. ✅ navigate to app.py
+    # ✅ 8b. Use serializer rules to remove `created_at` and `updated_at`
+    serialize_rules = ('-created_at', '-updated_at', '-roles.production')
+# ✅ 2. navigate to app.py
