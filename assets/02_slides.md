@@ -227,3 +227,79 @@ db.session.commit()
 `Movie.query.filter(Movie.title=="Ghostbusters").all()`
 
 - More here: https://docs.sqlalchemy.org/en/20/orm/queryguide/query.html#the-query-object
+
+---
+
+## SerializerMixin
+
+Having to write this again and again is annoying:
+
+```python
+for production in query:
+    prods_list.append({
+        "title": production.title,
+        "genre": production.genre,
+        "length": production.length
+    })
+```
+
+---
+
+## SerializerMixin
+
+- Luckily we have `SerializerMixin`.
+- We use `SerializerMixin` to automatically turn instances of our models into dictionaries:
+
+```python
+prods_list = []
+for production in query:
+    prods_list.append(production.to_dict())
+```
+
+- or even shorter...
+
+```python
+prods_list = [production.to_dict() for production in query]
+```
+
+---
+
+## SerializerMixin
+
+- Allows you to write rules on what fields to include in your response
+- Especially helpful when you need to make use of relationships
+
+```python
+from sqlalchemy_serializer import SerializerMixin
+from app import db
+
+class SomeModel(db.Model, SerializerMixin)
+```
+
+- An easy way to serialize JSON for GET from db and for PUT/POST/PATCH/etc. from client.
+
+
+
+---
+
+
+## Serializer Rules
+
+`serialize_only()` will include ONLY the exact specified fields
+`serialize_rules()` is the negative to `serialize_only()` (so don't forget the `-`)
+
+---
+
+## Serializer Rules
+
+```python
+only_result = item.to_dict(only=('field_one', 'field_two'))
+rules_result = item.to_dict(rules=('-field_one', '-field_two'))
+```
+
+OR
+
+```python
+serialize_only = ('field_one', 'field_two')
+serialize_rules = ('-field_one', '-field_two')
+```

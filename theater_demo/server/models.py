@@ -24,5 +24,5 @@ class Production(db.Model, SerializerMixin):
     composer = db.Column(db.String)
 
     # ✅ 8b. Use serializer rules to remove `created_at` and `updated_at`
-    serialize_rules = ('-created_at', '-updated_at', '-roles.production')
+    serialize_rules = ('-created_at', '-updated_at')
 # ✅ 2. navigate to app.py
