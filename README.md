@@ -25,3 +25,13 @@
 - [ ] Understand HTTP protocols
 - [ ] Intialize a Flask application
 - [ ] Use Flask routing and create views
+
+***
+
+## 2: Intro to Flask-SQLAlchemy
+### SWBATs:
+- [ ] Use Flask-SQLAlchemy as an ORM
+- [ ] Use Flask-Migrate to manage database schemas
+- [ ] Initialize a database with sample data
+- [ ] Implement a Flask application to query a database
+
