@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 # export FLASK_APP=app.py
 # export FLASK_RUN_PORT=5555
+# flask run
 
 # 2. Create a / route that returns Hello World
 @app.route('/')
