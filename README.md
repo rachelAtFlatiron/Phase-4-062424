@@ -2,9 +2,10 @@
 
 ## SWBATs
 
-- [ ] Understand how to use SQLAlchemy within Flask
-- [ ] Use Flask-SQLAlchemy to define and initialize a database
-- [ ] Use Flask routing and create views
+- [ ] Use Flask-SQLAlchemy as an ORM
+- [ ] Use Flask-Migrate to manage database schemas
+- [ ] Initialize a database with sample data
+- [ ] Implement a Flask application to query a database
 
 ---
 

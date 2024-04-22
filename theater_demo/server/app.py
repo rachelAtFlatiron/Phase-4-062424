@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-
-# 📚 Review With Students:
-    # Request-Response Cycle
-    # Web Servers and WSGI/Werkzeug
+# handle creating the api and connecting the database 
+# and enabling alembic/migrations
 
 # 1. Navigate to `models.py`
 

@@ -1,6 +1,4 @@
-# 📚 Review With Students:
-    # Review models
-    # Review MVC
+# handle creating the database
 
 #SQLAlchemy import
 from flask_sqlalchemy import SQLAlchemy
