@@ -11,10 +11,11 @@
 | ------- | ------ | ------- | -------- |
 | 1. Intro To Flask | Video | Starter | Solution |
 | 2. Intro To Flask-SQLAlchemy | Video | Starter | Solution |
-| 3. Flask Routes | Video | Starter | Solution |
-| 4. Rest APIs with Flask | Video | Starter | Solution | 
-| 5. Exceptions and Validations  | Video | Starter | Solution |
-| 6. Client Server Communication  | Video | Starter | Solution |
+| 3. Modeling Relationships with Flask-SQLAlchemy | Video | Starter | Solution |
+| 4. Flask Routes | Video | Starter | Solution | 
+| 5. Rest APIs with Flask   | Video | Starter | Solution |
+| 6. Exceptions and Validations | Video | Starter | Solution |
+| 7. Client Server Communication  | Video | Starter | Solution |
 
 ***
 
