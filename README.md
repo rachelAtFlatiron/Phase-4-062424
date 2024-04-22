@@ -81,7 +81,16 @@
 
 <br />
 
+---
 
-### 8. Create a route `/all-productions` to see all productions
-#### 8a. Use `serializerMixin` to convert to dictionaries
-#### 8b. Use serializer rules to remove `created_at` and `updated_at`
+<br />
+
+### 8. Create a dynamic route `/productions/<int:id>` that searches for all matching records
+
+<br />
+
+---
+
+### 9. Create a route `/all-productions` to see all productions
+#### 9a. Use `serializerMixin` to convert to dictionaries
+#### 9b. Use serializer rules to remove `created_at` and `updated_at`

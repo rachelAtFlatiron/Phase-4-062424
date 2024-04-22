@@ -69,8 +69,16 @@ def production(title):
         jsonify(production_response),
         200
     )
+# ✅ 8. Create a dynamic route `/productions/<int:id>` that searches for all matching records
+@app.route('/productions/<int:id>')
+def One_Production(id):
+    q = Production.query.filter_by(id=id).first()
 
-# ✅ 8. Create a route `/all-productions` to see all productions
+    prod_dict = q.to_dict()
+    res = make_response(jsonify(prod_dict), 200)
+    return res
+
+# ✅ 9. Create a route `/all-productions` to see all productions
 @app.route('/all-productions')
 def all_productions():
     q = Production.query.all()
@@ -84,7 +92,7 @@ def all_productions():
     #         "length": p.length
     #     })
     
-    # ✅ 8a. use SerializerMixin's .to_dict() for responses here and everywhere
+    # ✅ 9a. use SerializerMixin's .to_dict() for responses here and everywhere
     prod_list = [p.to_dict() for p in q]
     res = make_response(jsonify(prod_list), 200)
     return res 
