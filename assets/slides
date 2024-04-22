@@ -101,66 +101,6 @@ class Meeting:
 
 ---
 
-## SerializerMixin
-
-Having to write this again and again is annoying:
-
-```python
-for production in query:
-    prods_list.append({
-        "title": production.title,
-        "genre": production.genre,
-        "length": production.length
-    })
-```
-
----
-
-## SerializerMixin
-
-- Luckily we have `SerializerMixin`.
-- We use `SerializerMixin` to automatically turn instances of our models into dictionaries:
-
-```python
-prods_list = []
-for production in query:
-    prods_list.append(production.to_dict())
-```
-
-- or even shorter...
-
-```python
-prods_list = [production.to_dict() for production in query]
-```
-
----
-
-## SerializerMixin
-
-- Allows you to write rules on what fields to include in your response
-- Especially helpful when you need to make use of relationships
-
-```python
-from sqlalchemy_serializer import SerializerMixin
-from app import db
-
-class SomeModel(db.Model, SerializerMixin)
-```
-
-- An easy way to serialize JSON for GET from db and for PUT/POST/PATCH/etc. from client.
-
-
-
----
-
-
-## Serializer Rules
-
-`serialize_only()` will include ONLY the exact specified fields
-`serialize_rules()` is the negative to `serialize_only()` (so don't forget the `-`)
-
----
-
 ## Serializer Rules
 
 ```python
@@ -180,22 +120,22 @@ serialize_rules = ('-field_one', '-field_two')
 ## Max Recursion
 
 - When creating a many-to-many relationship we may reach a max-recursion depth 
-- For example with Actor -< Role >- Films if we try to serialize Actor we may get
+- For example with Employee -< EmployeeMeeting >- Meeting if we try to serialize Employee we may get
 ```python
 {
     id: 1,
     name: 'Richard',
-    films: [
+    meetings: [
         {
             id: 1,
-            title: 'Where\'s Richard?',
-            actors: [
+            topic: 'Where\'s Richard?',
+            employees: [
                 {
                     id: 1,
                     name: 'Richard',
-                    films: [
+                    meetings: [
                         {
-                            //more films...and actors...and films...
+                            //more meetings...and employees...and meetings...
                         }
                     ]
                 }
@@ -210,17 +150,17 @@ serialize_rules = ('-field_one', '-field_two')
 
 ## Max Recursion
 
-- To avoid this we have to specify where to stop by using `serialize_rules(-films.actors)`
+- To avoid this we have to specify where to stop by using `serialize_rules(-meetings.employees)`
 
 ```python
 {
     id: 1,
     name: 'Richard',
-    films: [
+    meetings: [
         {
             id: 1,
-            title: 'Where\'s Richard?'
-            //no more actors!
+            topic: 'Where\'s Richard?'
+            //no more employees!
         }
     ]
 }
