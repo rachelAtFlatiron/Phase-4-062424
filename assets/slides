@@ -1,52 +1,103 @@
 ---
 
-title: 'flask_routes'
+title: 'modeling relationships'
 
 ---
 
-# Flask Routes
+# Modeling Relationships in Flask-SQLAlchemy
 
 ---
 
-## Getting JSON from the request
+## What We'll Be Doing
 
-- It all depends on the content type passed into the request
-
----
-
-- `request.form`: key/value pairs in the HTML POST form that isn't JSON encoded
-- `request.form['key']` if key definitely exists
-- `request.form.get('key')` if key may not exist
+- Modeling a one-to-many and many-to-many relationship in Flask-SQLAlchemy
+- Using Flask to query those relationships
 
 ---
 
-- `request.values`: multipurpose for args and form, especially if they overlap
+## Single Source of Truth
+
+- AVOID REDUNDANCY
+- avoid not updating values in a consistent manner
 
 ---
 
-- ➡️ `request.get_json()`: parse json data ⬅️
+## One-to-Many AKA Belongs-to
 
----
+<img src="https://curriculum-content.s3.amazonaws.com/7159/python-p4-v2-flask-sqlalchemy/one_many_owning.png" />
 
-- `request.args`: key value pairs in the URL query string
-<img src='https://static.semrush.com/blog/uploads/media/00/6e/006eebc38b54220916caecfc80fed202/Guide-to-URL-Parameters-2.png' width="500px">
+```python
+#class 'Review'
+class Review:
+employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
+employee = db.relationship('Employee', back_populates="reviews")
 
----
-
-## Creating JSON responses
-
-- `jsonify()`: adds header for JSON
-- `make_response()`: allows you to add custom headers
+#class Employee
+class Employee: 
+reviews = db.relationship('Review', back_populates="employee")
+```
 
 <aside class="notes">
-- `json.dumps()` does not automatically add an application/json header, and you need to provide how to serialize 
-- `jsonify()` will add the header for you, and you need to provide how to serialize, you can return `jsonify()` immediately without `make_response`
-- `to_dict()` is enabled by flask-serialize
-- `make_response` allows you to add custom headers - mostly used for returning Flask views
 
-best way to do it is with `make_response(jsonify())` or just `jsonify()`
+- see drawio
+- this is where we add a foreign key column to the Model to store the relationship...don't forget to migrate!
+- the relationship stored is the employee associated with the current review
+- in the ORM we have to use back_populates to create a reciprocal relationship
+- this way we can get a list of reviews for one employee
 </aside>
 
+---
+
+## Many-to-Many AKA Has-many-through
+
+<img src="https://curriculum-content.s3.amazonaws.com/7159/python-p4-v2-flask-sqlalchemy/employee_meetings_fk.png" />
+
+<aside class="notes">
+
+- note the intermidary (join) table that holds the foreign keys into unique pairings
+</aside>
+
+---
+
+## Association Proxy
+
+
+Instead of...
+```python
+meeting = [Meeting.query.filter_by(id=1).first()]
+employees = [em.employee for em in meeting.employee_meetings]
+```
+
+We can do...
+```python
+class Meeting:
+    employees = association_proxy('employee_meetings', 'employee')
+```
+<aside class="notes">
+
+- used reach across intermidary model to access related model
+- see drawio
+</aside>
+
+---
+
+```python
+
+class Employee:
+    employee_meetings = db.relationship('EmployeeMeeting', back_populates='employee')
+    meetings = association_proxy('employee_meetings', 'meeting')
+
+class EmployeeMeeting:
+    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
+    meeting_id = db.Column(db.Integer, db.ForeignKey('meetings.id'))
+
+    employee = db.relationship('Employee', back_populates='employee_meetings')
+    meeting = db.relationship('Meeting', back_populates='employee_meetings')
+
+class Meeting:
+    employee_meetings = db.relationship('EmployeeMeeting', back_populates='meeting')
+    employees = association_proxy('employee_meetings', 'employee')
+```
 
 ---
 
