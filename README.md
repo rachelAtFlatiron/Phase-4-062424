@@ -1,10 +1,14 @@
 # Flask Routes: Deliverables
 
-### 1. Create `GET` `/productions`
-#### 1a. Write the query to database
-#### 1b. Convert query to a dictionary
-#### 1c. Return result with `make_respone`
-#### 1d. Test in Postman
+---
+
+## SWBATs
+
+- [ ] 
+
+---
+
+### 1. Refactor `/productions` to include a `GET` and `POST`
 
 <br />
 

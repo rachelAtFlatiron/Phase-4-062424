@@ -26,44 +26,30 @@ def index():
     return '<h1>Hello World!</h1>'
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 1. Create a route to /productions for GET requests
+# ✅ 1. Refactor `/productions` to include a `GET` and `POST`
 @app.route('/productions', methods=["GET", "POST"])
 # 🛑 emphasize class name needs to be different from model name
 def Productions():
     if(request.method=="GET"):
-        # 1a. Create the query
         q = Production.query.all()
-        # 1b. Loop through the query and convert each object into a dictionary
-        
-        # prod_list = []
-        # for p in q:
-        #     prod_list.append({
-        #         "title": p.title,
-        #         "director": p.director,
-        #         "length": p.length
-        #     })
-        
         prod_list = [p.to_dict() for p in q]
-
-        # 1c. Use make_response and jsonify to return a response
-        # 5c. use SerializerMixin's .to_dict() for responses here and everywhere
         res = make_response(jsonify(prod_list), 200)
         return res 
-        # 1d. Test in Postman
+
     if(request.method=="POST"):
-        # 3. Create a route to /productions for a POST request
+        # ✅ 2. Create a route to /productions for a POST request
         # 🛑 request.args: key value pairs in URL query string
         # 🛑 request.form: key value pairs in HTML post form (see Postman: form-data)
         # 🛑 request.values: combines args, form
         # 🛑 request.json or request.get_json() - for json
-        # 3a. Get information from request.get_json() 
+        # ✅ 2a. Get information from request.get_json() 
         data = request.get_json()
-        # 3b. Create new object
+        # ✅ 2b. Create new object
         prod = Production(title=data.get('title'), genre=data.get('genre'), length=data.get('length'), year=data.get('year'), image=data.get('image'), language=data.get('language'), director=data.get('director'), description=data.get('description'), composer=data.get('composer') )
-        # 3c. Add and commit to db 
+        # ✅ 2c. Add and commit to db 
         db.session.add(prod)
         db.session.commit()
-        # 3d. Convert to dictionary / # 5c. use .to_dict
+        # ✅ 2d. Convert to dictionary / # 5c. use .to_dict
 
         # dict = {
         #     "id": prod.id,
@@ -72,38 +58,28 @@ def Productions():
 
         dict = prod.to_dict()
         
-        # 3e. return as JSON
+        # ✅ 2e. Return as JSON
         return make_response(jsonify(dict), 201)
-        # 3f. Test in postman
+        # ✅ 2f. Test in postman
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 2. Create a route to /productions/:id for single GET requests
+# ✅ 3. Create a delete request 
+# ✅ 3a. Refactor `/productions/:id` to take both a `GET` and a `DELETE`
 @app.route('/productions/<int:id>', methods=["GET", "DELETE"])
 def One_Production(id):
     if(request.method == 'GET'):
         q = Production.query.filter_by(id=id).first()
-
-        # prod_dict = {
-        #     "title": q.title,
-        #     "length": q.length,
-        #     "director": q.director
-        # }
-
-        # 5c. use to_dict
         prod_dict = q.to_dict()
         res = make_response(jsonify(prod_dict), 200)
         return res
 
-    # 4. Create a delete request 
     if(request.method == "DELETE"):
+        # ✅ 3b. Query for the wanted production
         q = Production.query.filter_by(id=id).first()
+        # ✅ 3c. Use `session.delete`
         db.session.delete(q)
         db.session.commit()
         return make_response({}, 204)
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 5. Serializers: navigate back to models.py 
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
