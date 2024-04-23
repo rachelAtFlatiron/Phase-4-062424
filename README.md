@@ -1,12 +1,14 @@
-# Flask Routes: Deliverables
+# Flask Routes
 
 ---
 
 ## SWBATs
 
-- [ ] 
+- [ ] Build an API to handle GET, POST, PATCH, and DELETE requests.
 
 ---
+
+## Deliverables
 
 ### 1. Refactor `/productions` to include a `GET` and `POST`
 

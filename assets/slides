@@ -4,7 +4,38 @@ title: 'flask_routes'
 
 ---
 
-# Flask Routes
+# Flask Routes: Building APIs
+
+---
+
+## GET
+
+1. Query for related instances (don't forget `.all()` or `.first()`, etc.)
+2. Convert query into JSON-accessible format using `.to_dict`
+3. Return response using `make_response()`
+
+<aside class="notes">
+
+- for jsonify you would have to build up the list/dictionary yourself
+</aside>
+
+---
+
+## DELETE
+
+1. Query for the single instance and save in a variable
+2. Use `db.session.delete(query_instance)` to delete the row
+3. Commit this change to the database with `db.session.commit()`
+4. Return a response with an empty JSON object
+
+---
+
+## POST 
+
+1. Create a new instance with values from the request
+2. Add the new instance to the session using `db.session.add(new_instance)`
+3. Commit this change to the database with `db.session.commit()`
+4. Return a JSON response with the new instance and a status code of 201
 
 ---
 
@@ -18,6 +49,10 @@ title: 'flask_routes'
 - `request.form['key']` if key definitely exists
 - `request.form.get('key')` if key may not exist
 
+<aside class="notes">
+
+- play around in Postman with body's data types
+</aside>
 ---
 
 - `request.values`: multipurpose for args and form, especially if they overlap
@@ -31,14 +66,8 @@ title: 'flask_routes'
 - `request.args`: key value pairs in the URL query string
 <img src='https://static.semrush.com/blog/uploads/media/00/6e/006eebc38b54220916caecfc80fed202/Guide-to-URL-Parameters-2.png' width="500px">
 
----
-
-## Creating JSON responses
-
-- `jsonify()`: adds header for JSON
-- `make_response()`: allows you to add custom headers
-
 <aside class="notes">
+
 - `json.dumps()` does not automatically add an application/json header, and you need to provide how to serialize 
 - `jsonify()` will add the header for you, and you need to provide how to serialize, you can return `jsonify()` immediately without `make_response`
 - `to_dict()` is enabled by flask-serialize
@@ -47,3 +76,13 @@ title: 'flask_routes'
 best way to do it is with `make_response(jsonify())` or just `jsonify()`
 </aside>
 
+
+---
+
+## PATCH
+
+1. Get the appropriate class instance by id
+2. Loop through all the attributes in request: `for attr in request.form`
+3. Replace in class instance accordingly: `setattr(instance, attr, request.form.get(attr))`
+4. Add and commit in session
+5. Return json response with updated value and status code 200
