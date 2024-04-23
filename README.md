@@ -11,7 +11,7 @@
 | ------- | ------ | ------- | -------- |
 | 1. Intro To Flask | Video | Starter | Solution |
 | 2. Intro To Flask-SQLAlchemy | Video | Starter | Solution |
-| 3. Modeling Relationships with Flask-SQLAlchemy | Video | Starter | Solution |
+| 3. Modeling Relationships | Video | Starter | Solution |
 | 4. Flask Routes | Video | Starter | Solution | 
 | 5. Rest APIs with Flask   | Video | Starter | Solution |
 | 6. Exceptions and Validations | Video | Starter | Solution |
@@ -36,3 +36,16 @@
 - [ ] Initialize a database with sample data
 - [ ] Implement a Flask application to query a database
 
+***
+
+## 3: Modeling Relationships
+### SWBATs:
+- [ ] Use Flask-SQLAlchemy to model a many-to-many relationship
+- [ ] Use Flask-SQLAlchemy to model a one-to-many relationship
+- [ ] Use SQLAlchemy-Serializer to prevent max recursion
+
+***
+
+## 4: Flask Routes
+### SWBATs:
+- [ ] Build an API to handle GET, POST, PATCH, and DELETE requests.
