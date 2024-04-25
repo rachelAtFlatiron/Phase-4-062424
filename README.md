@@ -1,5 +1,19 @@
 # Exceptions and Validations: Deliverables
 
+---
+
+## SWBATs:
+
+- [ ] Determine the significant differences between 100-500 HTTP status codes.
+- [ ] Determine best practices in error handling in Flask.
+- [ ] Define constraints and validations in data processing.
+- [ ] Restrict database input to specific formats using constraints.
+- [ ] Ensure that only acceptable input is sent to the database using validations.
+
+---
+
+## Deliverables:
+
 ### 7. Add not found errors 
 #### 7a. Import `NotFound` from `werkzeug.exceptions` for error handling
 #### 7b. If a production is not found raise the NotFound exception in `/productions` and `/productions/:id`
