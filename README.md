@@ -1,5 +1,15 @@
 # REST APIs with Flask: Deliverables
 
+---
+
+## SWBATs
+
+- [ ] Build RESTful APIs that are easy to navigate and use in applications.
+
+---
+
+## Deliverables:
+
 ### 1. Review: Serializer
 #### 1a. Review `Actor` class in `models.py` and the relationships 
 
