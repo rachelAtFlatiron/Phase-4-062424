@@ -53,7 +53,15 @@
 ***
 
 ## 5: Rest APIs with Flask
+### SWBATs:
+- [ ] Build RESTful APIs that are easy to navigate and use in applications.
 
 ***
 
 ## 6: Exceptions and Validations
+### SWBATs:
+- [ ] Determine the significant differences between 100-500 HTTP status codes.
+- [ ] Determine best practices in error handling in Flask.
+- [ ] Define constraints and validations in data processing.
+- [ ] Restrict database input to specific formats using constraints.
+- [ ] Ensure that only acceptable input is sent to the database using validations.
