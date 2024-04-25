@@ -49,3 +49,11 @@
 ## 4: Flask Routes
 ### SWBATs:
 - [ ] Build an API to handle GET, POST, PATCH, and DELETE requests.
+
+***
+
+## 5: Rest APIs with Flask
+
+***
+
+## 6: Exceptions and Validations
