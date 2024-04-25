@@ -35,13 +35,31 @@ def Productions():
         prod_list = [p.to_dict() for p in q]
         res = make_response(jsonify(prod_list), 200)
         return res 
+    
+    #request.form for x-www-form-urlencoded, multipart/form
+    #request.args for params in url 
+    #request.get_json() or request.json for JSON
+    #request.values for both form and params - since both are one long query string
 
     if(request.method=="POST"):
         # ✅ 2. Create a route to /productions for a POST request
-        # 🛑 request.args: key value pairs in URL query string
-        # 🛑 request.form: key value pairs in HTML post form (see Postman: form-data)
-        # 🛑 request.values: combines args, form
-        # 🛑 request.json or request.get_json() - for json
+        # 🛑 possible headers:
+            # multipart/form-data: header content-type: multipart/form-data
+                # good for files, non-ASCII, binary data, large data
+                # contains some sort of boundary?
+            # www-form-urlencoded: content-type: x-www-form-urlencoded
+                # use for simple text fields, body is essentially one giant query string
+            # raw json: content-type: application/json
+
+        # 🛑 request.form: key value pairs x-www-form-urlencoded or form-data (changes content-type header))
+            
+        # 🛑 request.json or request.get_json() - for json (you will use this because you will be setting those headers in your POST request)
+            # must choose either json or x-www-form-urlencoded as per headers
+
+        # 🛑 request.args: gets from params (which you see in the URL)
+
+        # 🛑 request.values: gets from body and params
+        
         # ✅ 2a. Get information from request.get_json() 
         data = request.get_json()
         # ✅ 2b. Create new object
@@ -65,21 +83,39 @@ def Productions():
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ✅ 3. Create a delete request 
 # ✅ 3a. Refactor `/productions/:id` to take both a `GET` and a `DELETE`
-@app.route('/productions/<int:id>', methods=["GET", "DELETE"])
+@app.route('/productions/<int:id>', methods=["GET", "DELETE", "PATCH"])
 def One_Production(id):
+    # ✅ 3b. Query for the wanted production
+    q = Production.query.filter_by(id=id).first()
+    if not q:
+        return make_response({'message': 'production not found'}, 404)
+        # can also use werkzeug HTTP exception
+        # from werkzeug.exceptions import HTTPException, NotFound
+        # raise NotFound()
     if(request.method == 'GET'):
-        q = Production.query.filter_by(id=id).first()
         prod_dict = q.to_dict()
         res = make_response(jsonify(prod_dict), 200)
         return res
 
     if(request.method == "DELETE"):
-        # ✅ 3b. Query for the wanted production
         q = Production.query.filter_by(id=id).first()
         # ✅ 3c. Use `session.delete`
         db.session.delete(q)
         db.session.commit()
         return make_response({}, 204)
+    
+    if(request.method == "PATCH"):
+        
+        json_dict = request.get_json()
+        #request.form for x-www-form-urlencoded, multipart/form
+        #request.args for params in url 
+        #request.get_json() or request.json for JSON
+        #request.values for both form and params - since both are one long query string
+        for attr in json_dict:
+            setattr(q, attr, json_dict.get(attr))
+        db.session.add(q)
+        db.session.commit()
+        return make_response(q.to_dict(), 200)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

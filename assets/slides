@@ -51,15 +51,13 @@ title: 'flask_routes'
 
 <aside class="notes">
 
-- play around in Postman with body's data types
+- for x-www-form-urlencoded or multipart/form data
+- multipart/form-data: header content-type: multipart/form-data
+    - good for files, non-ASCII, binary data, large data
+    - contains some sort of boundary?
+- www-form-urlencoded: content-type: x-www-form-urlencoded
+    - use for simple text fields, body is essentially one giant query string
 </aside>
----
-
-- `request.values`: multipurpose for args and form, especially if they overlap
-
----
-
-- ➡️ `request.get_json()`: parse json data ⬅️
 
 ---
 
@@ -68,14 +66,23 @@ title: 'flask_routes'
 
 <aside class="notes">
 
-- `json.dumps()` does not automatically add an application/json header, and you need to provide how to serialize 
-- `jsonify()` will add the header for you, and you need to provide how to serialize, you can return `jsonify()` immediately without `make_response`
 - `to_dict()` is enabled by flask-serialize
 - `make_response` allows you to add custom headers - mostly used for returning Flask views
 
-best way to do it is with `make_response(jsonify())` or just `jsonify()`
 </aside>
 
+---
+
+- `request.values`: multipurpose for form body and url query when they overlap
+
+---
+
+- ➡️ `request.get_json()`: parse json data from body ⬅️
+
+<aside class="notes">
+
+- does not get included in request.values since json is not part of a large query string
+</aside>
 
 ---
 
