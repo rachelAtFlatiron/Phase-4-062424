@@ -1,5 +1,17 @@
 # Client Server Communication: Deliverables
 
+---
+
+## SWBATs
+
+- [ ] Use React and Flask together to build beautiful and powerful web applications.
+- [ ] Organize client and server code so that it is easy to understand and maintain.
+- [ ] Learn how to create and validate forms with Formik and Yup.
+
+---
+
+## Deliverables 
+
 ### 1. Use gunicorn to start the client and server
 #### 1a. Install `gunicorn`, `honcho`
 #### 1b. Create a `Procfile.dev` file and write:
