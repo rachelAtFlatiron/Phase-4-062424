@@ -7,18 +7,8 @@ function ProductionDetail() {
 	});
 
 	// 4a. fetch current production based on params
-	const params = useParams();
-	const navigate = useNavigate()
-	useEffect(() => {
-		fetch(`/productions/${params.id}`).then((res) => {
-			if (res.ok) {
-				res.json().then((data) => setProduction(data));
-			} else {
-				// 4c. if response is not ok, navigate to /not-found
-				navigate('/not-found')
-			}
-		});
-	}, []);
+	// 4c. if response is not ok, navigate to /not-found
+
 
 	// 4b. destructure the values and display them on page
 	const { id, title, genre, image, description, director, length, composer } = production;
