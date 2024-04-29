@@ -65,3 +65,11 @@
 - [ ] Define constraints and validations in data processing.
 - [ ] Restrict database input to specific formats using constraints.
 - [ ] Ensure that only acceptable input is sent to the database using validations.
+
+***
+
+## 7: Client Server Communication
+### SWBATs:
+- [ ] Use React and Flask together to build beautiful and powerful web applications.
+- [ ] Organize client and server code so that it is easy to understand and maintain.
+- [ ] Learn how to create and validate forms with Formik and Yup.
