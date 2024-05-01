@@ -16,6 +16,7 @@
 | 5. Rest APIs with Flask   | Video | Starter | Solution |
 | 6. Exceptions and Validations | Video | Starter | Solution |
 | 7. Client Server Communication  | Video | Starter | Solution |
+| 8. Authentication | Video | Starter | Solution |
 
 ***
 
@@ -73,3 +74,12 @@
 - [ ] Use React and Flask together to build beautiful and powerful web applications.
 - [ ] Organize client and server code so that it is easy to understand and maintain.
 - [ ] Learn how to create and validate forms with Formik and Yup.
+
+***
+
+## 8: Authentication
+### SWBATs:
+- [ ] Explain what a cookie is and what cookies can be used for.
+- [ ] Configure a Flask API to use cookies.
+- [ ] Understand how websites use login to authenticate users.
+- [ ] Use the session object to authenticate a user.
