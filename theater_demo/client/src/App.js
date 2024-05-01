@@ -14,7 +14,8 @@ import Auth from "./components/Auth";
 function App() {
 	const [productions, setProductions] = useState([]);
 	const [actors, setActors] = useState([]);
-	// 4a. create user state and update user function
+	// ✅ 4. Pass the new user to App.js
+	// ✅ 4a. create user state and update user function
 	const [user, setUser] = useState(null)
 
 	useEffect(() => {
@@ -24,20 +25,10 @@ function App() {
 		fetch("/actors")
 			.then((res) => res.json())
 			.then(setActors);
-		// 9c. invoke getUser
-		getUser()
-	}, []);
-
-	// 4a. update user function
-	const updateUser = (user) => {
-		setUser(user)
-	}
-
-	// 9a. create function that GETs /authorized-session
-	const getUser = () => {
-		fetch('/authorized-session')
+		// ✅ 9a. fetch GETs `/authenticate-session` in `useEffect`
+		fetch('/authenticate-session')
 		.then(res => {
-			// 9b. if res.ok update user with the response
+			// ✅ 9b. if res.ok update user with the response
 			if(res.ok){
 				res.json().then(data => {
 					setUser(data)
@@ -46,12 +37,17 @@ function App() {
 				setUser(null)
 			}
 		})
+	}, []);
+
+	// ✅ 4a. update user function
+	const updateUser = (user) => {
+		setUser(user)
 	}
 
 	const addProduction = (production) =>
 		setProductions((current) => [...current, production]);
 	
-	// 7a. if no user, return essential JSX
+	// ✅ 7a. if no user, return essential JSX
 	if (!user){
 		return (
 			<div className="App light">
@@ -60,8 +56,12 @@ function App() {
 			</div>
 		)
 	}
+	// ✅ 11. Show user greeting in `Navigation.js`
+	// ✅ 11a. pass down user as props
+	// ✅ 11b. Conditionally render the logout button and a greeting
 	return (
 		<div className="App light">
+			
 			<Navigation updateUser={updateUser} user={user} />
 			<Routes>
 				< Route path = "/auth" element={<Auth updateUser={updateUser} />} />

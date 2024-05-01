@@ -31,13 +31,13 @@ def get_longest_movies():
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# 1a. put some cookies in inspector of browser
-# 1a. create a GET route for dark-mode
+# ✅ 1a. put some cookies in inspector of browser
+# ✅ 1a. create a GET route for dark-mode
 @app.route('/dark-mode', methods=["GET"])
 def mode():
-    # 1c. import ipdb; ipdb.set_trace()
+    # ✅ 1c. import ipdb; ipdb.set_trace()
     # 🛑 checkout request.cookies
-    # 1d. send a response with cookies info
+    # ✅ 1d. send a response with cookies info
     return make_response(jsonify(
         {
             "cookies": request.cookies["mode"]
@@ -48,18 +48,17 @@ def mode():
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# 2a. create post method to create a new user
+# ✅ 2a. In `app.py` create a new user
 class Users(Resource):
     def post(self):
         data = request.get_json()
         user = User(name=data.get('name'), username=data.get('username'))
-        # 🛑 db.session is specific to flask and sqlalchemy
         db.session.add(user)
         db.session.commit()
 
-        # 2b. import session from flask
-        # 2c. generate secret key
-        # 2d. save the user_id to session hash
+        # ✅ 2b. import session from flask
+        # ✅ 2c. generate secret key to hash session
+        # ✅ 2d. save the user_id to session hash
         # 🛑 today's sessions are cross language
         # 🛑 putting user_id in sessions allows us to check for it when the user first visits the page so that we can keep them logged in
         # 🛑 use ipdb to view -> we have access to info while on server
@@ -67,26 +66,26 @@ class Users(Resource):
         # import ipdb; ipdb.set_trace()
         session['user_id'] = user.id
         return make_response(user.to_dict(), 201)
-# 2e. add resource to route `/users`
+# ✅ 2e. add resource to route `/users`
 api.add_resource(Users, '/users')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# 5a. create /logout route and set session['user_id'] to None
+# ✅ 5a. create /logout route and set session['user_id'] to None
 @app.route('/logout', methods=["GET"])
 def logout():
     session['user_id'] = None 
-    # 5b. return empty response
+    # ✅ 5b. return empty response
     return make_response('' , 204)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# 8a. create route `/authorized-session`
-@app.route('/authorized-session', methods=["GET"])
+# ✅ 8a. create route `/authenticate-session`
+@app.route('/authenticate-session', methods=["GET"])
 def authorize():
-    # 8b. query for user by `user_id` stored in `session`
+    # ✅ 8b. query for user by `user_id` stored in `session`
     user = User.query.filter_by(id=session.get('user_id')).first()
-    # 8c. if user exists, send user info as response, otherwise `abort` with `401 Unauthorized`
+    # ✅ 8c. if user exists, send user info as response, otherwise `abort` with `401 Unauthorized`
     if user: 
         return make_response(user.to_dict(), 200)
     else: 
@@ -96,17 +95,17 @@ def authorize():
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# 10a. create a /login resource with a method
+# ✅ 10a. create a /login resource with a method
 class Login(Resource):
     def post(self):
-        # 10b. get username from request
+        # ✅ 10b. get username from request
         data = request.get_json()
         user = User.query.filter_by(username=data.get('username')).first()
-        # 10c. if user exists, save id to session and return user
+        # ✅ 10c. if user exists, save id to session and return user
         if (user):
             session['user_id'] = user.id
             return make_response(user.to_dict(), 200)
-        # 10d. if user does not exist, raise an error
+        # ✅ 10d. if user does not exist, raise an error
         else:
             raise Unauthorized('invalid credentials')
 api.add_resource(Login, '/login')            

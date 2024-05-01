@@ -1,18 +1,17 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
-// 11a. pass down user as props
+
 function Navigation({ updateUser, user }) {
 	const navigate = useNavigate();
 
-	// ** You Do **
-	// 6a. write logout function that fetches `/logout`
+	// ✅ 6a. write logout function that fetches `/logout`
 	function handleLogout() {
 		fetch("/logout").then((res) => {
-			// 6b. if res.ok....
+			// ✅ 6b. if res.ok....
 			if (res.ok){
-				// 6b. update the user to be no one....
+				// ✅ 6b. update the user to be no one....
 				updateUser(null);
-				// 6c. navigate to the login page
+				// ✅ 6c. navigate to the login page
 				navigate("/auth");
 			}
 		});
@@ -40,6 +39,8 @@ function Navigation({ updateUser, user }) {
 				<NavLink className="button" to="/auth">
 					Log In
 				</NavLink>
+				{	// ✅ 11b. Conditionally render the logout button and a greeting 
+				}
 				{ user ? 
 					(<>
 						<button onClick={handleLogout} className="button">

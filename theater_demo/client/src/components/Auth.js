@@ -8,7 +8,8 @@ function Auth({ updateUser }) {
     const navigate = useNavigate()
 	const toggleSignup = () => setSignup((prev) => !prev);
 
-    // 3a. create a validations schema using yup
+    // ✅ 3. Create a form for the user to signup
+    // ✅ 3a. create a validations schema using yup
     const formSchema = yup.object().shape({
         name: yup.string(), // 🛑 not required due to login form
         username: yup.string().required("Please enter a username")
@@ -34,9 +35,9 @@ function Auth({ updateUser }) {
             .then(data => {
                 // 🛑 reset form
                 actions.resetForm()
-                // 4c. pass result to updateUser to set state
+                // ✅ 4c. pass result to updateUser to set state
                 updateUser(data)    
-                // 4d. redirect to homepage if login is successful
+                // ✅ 4d. redirect to homepage if login is successful
                 navigate('/')
             })
         }

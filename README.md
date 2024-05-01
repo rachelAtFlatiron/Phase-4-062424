@@ -1,5 +1,15 @@
 # Auth Part One: Deliverables
 
+## SWBATs
+
+- [ ] Explain what a cookie is and what cookies can be used for.
+- [ ] Configure a Flask API to use cookies.
+- [ ] Understand how websites use login to authenticate users.
+- [ ] Use the session object to authenticate a user.
+
+---
+
+## Deliverables
 ### 1. Use cookies
 #### 1a. In the inspector of the browser, enter a cookie for dark/light mode.
 #### 1b. Create a GET `/dark-mode` route in `App.py` to track dark mode and light mode.
@@ -12,16 +22,7 @@
 
 <br />
 
-## Our end goal is to require the user to log in to view the site and KEEP the user logged in
-
-<br />
-
----
-
-<br />
-
-### 2. Create a `Resource` for `User` to sign up
-#### - Review the `User` class in `models.py`
+### 2. Flask: In `app.py` create a new user 
 #### 2a. Create a `POST` method to create a new user
 #### 2b. Import `session` from `flask`
 #### 2c. Create a secret key to enable hasing of `session`
@@ -33,8 +34,7 @@ python -c 'import os; print(os.urandom(16))'
 ```js 
 api.secret_key = <secret_key>
 ```
-#### 2d. In the `POST` request save the user id to the session hash (NOT `db.session`)
-#### 2e. Add `User` resource to the route `/users`
+#### 2d. In the `POST` request save the user id to the session hash
 
 <br />
 
@@ -42,7 +42,7 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 3. Review: In `Auth.js` update the form with a `formik` and `yup` 
+### 3. React: Create a formik form for the user to signup
 #### 3a. Create a validations schema using `yup`
 #### 3b. Create a `formik` instance containing...
 #### - initialValues
@@ -57,7 +57,7 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 4. Pass the new user up to `App.js`
+### 4. React: Add the user to React state
 #### 4a. Create a state `user` in `App.js` and an `updateUser` function
 #### 4b. Pass `updateUser` to `Auth.js`
 #### 4c. Pass `POST` response to `updateUser`
@@ -69,7 +69,7 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 5. Create a `/logout` custom route
+### 5. Flask: Create a `/logout` custom route
 #### 5a. Set `session['user_id']` to `None`
 #### 5b. Return an empty response
 
@@ -79,7 +79,7 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 6. You Do: In `Navigation.js` fetch `/logout`
+### 6. React: Remove user from state
 #### - Uncomment the logout button
 #### 6a. Write a `handleLogout` function that fetches `/logout` 
 #### 6b. If `res.ok` update the user to be `{}`...
@@ -91,7 +91,7 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 7. Use user state to determine whether app is to be viewable
+### 7. React: Use user state to determine whether app is to be viewable
 #### 7a. In `App.js` if the user is `null` return the following JSX:
 ```js
 <div className="App light">
@@ -106,7 +106,7 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 8. Create a route for `/authorized-session` in `app.py` that will determine if there is a user stored in session
+### 8. Flask: Create a route for `/authenticate-session` in `app.py` that will determine if there is a user stored in session
 #### 8a. Create the route
 #### 8b. Query for user by `user_id` stored in `session`
 #### 8c. If user exists, send user info as response, otherwise `abort` with `401 Unauthorized`
@@ -117,8 +117,8 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 9. Fetch `/authorized-session` in `App.js` to check if user is present in `session`
-#### 9a. Create a function `getUser` that fetch GETs `/authorized-session`
+### 9. React: Fetch `/authenticate-session` in `App.js` to check if user is present in `session`
+#### 9a. fetch GETs `/authenticate-session` in `useEffect`
 #### 9b. If `res.ok` update `user` with the response 
 #### 9c. Invoke `getUser`
 
@@ -128,13 +128,11 @@ api.secret_key = <secret_key>
 
 <br />
 
-### 10. Create a `/login` `Resource`
+### 10. Flask: Create a `/login` `Resource`
 #### 10a. Create a `Resource` `/login` in `app.py` with only a `post` method
 #### 10b. Get the username from the request's json
 #### 10c. If user exists, save id in session and return user as response
 #### 10d. Otherwise raise error
-#### 10e. Add the resource to route `/login`
-#### - Review `formik` submit method 
 
 <br />
 

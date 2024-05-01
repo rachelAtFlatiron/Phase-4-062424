@@ -4,7 +4,7 @@ title: '05_auth_one'
 
 ---
 
-# Authorization
+# Authentication
 
 ---
 
@@ -16,11 +16,12 @@ Authorization: Users' access rights
 ## Cookies
 
 - memory IN YOUR BROWSER (client side) to track information about users
-- can or can not persist
 - ex. tracking ad information, keeping user logged in, seeing how many articles you've read on some site
 - you can see cookies created in developer tools
+- plaintext which is not secure
 
 <aside class="notes">
+
 - best for things not important to user security
 </aside>
 
@@ -28,15 +29,37 @@ Authorization: Users' access rights
 
 ## Sessions
 
-- stores user information ON THE SERVER SIDE
-- information is encrypted
-- info is only ever unencrypted on server side 
-- Note: `db.session()` (opening up ability to add info to database) is different than browser sessions (place to store info about user, etc.)
+- `session` is a special cookie containing any information we want
+- info gets encrypted and sent to client to be stored in browser
+- we encrypt the information using a secret key:
+```python
+app.secret_key = 'BAD_SECRET_KEY'
+$ python -c 'import os; print(os.urandom(16))'
+```
 
 <aside class="notes">
-The read-only sessionStorage property accesses a session Storage object for the current origin. sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.<br />
+
+- The read-only sessionStorage property accesses a session Storage object for the current origin. sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.<br />
 sessionStorage only stored for current session (deleted after closing browser), cookies can persist
+- Note: `db.session()` (opening up ability to add info to database) is different than browser sessions (place to store info about user, etc.)
 </aside>
+
+---
+
+## What We'll Be Doing
+
+1. Signing a user up
+    - creating session cookie
+    - adding user to React state
+2. Logging a user out
+    - deleting session cookie
+    - removing user from React state
+3. Signing a user in
+    - creating session cookie
+    - adding user to React state
+4. Keeping a user logged in (authenticate)
+    - checking session cookie
+    - adding user to React state
 
 ---
 
