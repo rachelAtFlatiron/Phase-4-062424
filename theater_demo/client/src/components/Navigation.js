@@ -1,22 +1,15 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 
-function Navigation({ updateUser, user }) {
+function Navigation({}) {
 	const navigate = useNavigate();
 
 	// ✅ 6a. write logout function that fetches `/logout`
-	function handleLogout() {
-		fetch("/logout").then((res) => {
+	
 			// ✅ 6b. if res.ok....
-			if (res.ok){
 				// ✅ 6b. update the user to be no one....
-				updateUser(null);
 				// ✅ 6c. navigate to the login page
-				navigate("/auth");
-			}
-		});
-	}
-
+				
 	return (
 		<header>
 			<h1>
@@ -41,15 +34,7 @@ function Navigation({ updateUser, user }) {
 				</NavLink>
 				{	// ✅ 11b. Conditionally render the logout button and a greeting 
 				}
-				{ user ? 
-					(<>
-						<button onClick={handleLogout} className="button">
-							Log Out
-						</button>
-						<p style={{'margin-top': '8px'}}>Hello, {user.username}</p>
-					</>) : 
-					''
-				}		
+					
 			</div>
 		</header>
 	);
