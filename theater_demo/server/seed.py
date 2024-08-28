@@ -240,9 +240,12 @@ with app.app_context():
     db.session.commit()
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~ROLES~~~~~~~~~~~~~~~~~~~~~~
-    # role = Role(role_name='', production_id=-1, actor_id=-1)
+    # role = Role(role_name='', production_id=1, actor_id=1)
+
+    #sqlAlchemy is nice, thanks to our relationships we can create instances where we pass in an instance instead of a foreign key integer
     margot = Role(
         role_name='Margot',
+        # make sure to use the db.relationship name on the model that contains foreign keys
         actor=anya,
         production=menu
     )
