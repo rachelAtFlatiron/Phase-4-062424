@@ -23,7 +23,10 @@ class Production(db.Model, SerializerMixin):
     roles = db.relationship('Role', back_populates='production')
     actors = association_proxy('roles', 'actor')
     
-    serialize_rules = ('-created_at', '-updated_at', '-roles.production', '-actors.productions')
+    serialize_rules = ('-created_at', '-updated_at', '-roles.production', '-actors.productions', '-roles.actor.roles')
+
+    def __repr__(self):
+        return f'<Production {self.id} {self.title} />'
 class Role(db.Model, SerializerMixin):
     __tablename__ = "roles"
     
@@ -40,6 +43,9 @@ class Role(db.Model, SerializerMixin):
     actor = db.relationship('Actor', back_populates='roles')
 
     serialize_rules = ('-created_at', '-updated_at', '-production.roles', '-actors.roles')
+
+    def __repr__(self):
+        return f'<Role {self.id} {self.role_name} />'
 
 class Actor(db.Model, SerializerMixin):
     __tablename__ = "actors"
@@ -58,3 +64,6 @@ class Actor(db.Model, SerializerMixin):
     productions = association_proxy('roles', 'production')
 
     serialize_rules = ('-created_at', '-updated_at', '-roles.actor', '-productions.actors')
+
+    def __repr__(self):
+        return f'<Actor {self.id} {self.name} />'
