@@ -6,6 +6,7 @@ from models import db, Production, Role, Actor
 from flask_restful import Api, Resource
 # 7a. import NotFound from werkzeug.exceptions and abort from Flask
 # 10a. import UnprocessableEntity
+from werkzeug.exceptions import NotFound, UnprocessableEntity
 
 
 app = Flask(__name__)
@@ -17,6 +18,7 @@ migrate = Migrate(app, db)
 api = Api(app)
 
 db.init_app(app)
+
 
 # | HTTP Verb 	|       Path       	| Description        	|
 # |-----------	|:----------------:	|--------------------	|
@@ -74,6 +76,8 @@ class Roles(Resource):
     def get(self):
         q = Role.query.all()
         # 7c. If not found, use abort
+        if(not q):
+            raise NotFound("roles not found")
         role_dict = [r.to_dict(only=('id', 'role_name', 'actor.name', 'production.title')) for r in q]
         return make_response(role_dict, 200)
     
@@ -95,6 +99,12 @@ class One_Role(Resource):
     def get(self, id):
         q = Role.query.filter_by(id=id).first()
         # 7c. If not found, use abort
+        #NotFound class is specifically an exception <class 'werkzeug.exceptions.NotFound'>
+        print(type(NotFound('hi')))
+        #make_response class is just a regular response <class 'flask.wrappers.Response'>
+        print(type(make_response({'sdlkfj': 'sldkfj'}, 200)))
+        if(not q):
+            raise NotFound(f'role {id} not found')
         return make_response(q.to_dict(), 200)
     def delete(self, id):
         q = Role.query.filter_by(id=id).first()

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: bba825bc1b63
+Revision ID: 6133c3f88c72
 Revises: 
-Create Date: 2023-05-22 21:24:21.807572
+Create Date: 2024-08-30 11:25:32.837292
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bba825bc1b63'
+revision = '6133c3f88c72'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,11 +23,11 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('image', sa.String(), nullable=False),
+    sa.Column('image', sa.String(), nullable=True),
     sa.Column('age', sa.Integer(), nullable=True),
     sa.Column('country', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.UniqueConstraint('image')
     )
     op.create_table('productions',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -37,13 +37,13 @@ def upgrade():
     sa.Column('genre', sa.String(), nullable=True),
     sa.Column('length', sa.Integer(), nullable=True),
     sa.Column('year', sa.Integer(), nullable=True),
-    sa.Column('image', sa.String(), nullable=False),
+    sa.Column('image', sa.String(), nullable=True),
     sa.Column('language', sa.String(), nullable=True),
     sa.Column('director', sa.String(), nullable=True),
-    sa.Column('description', sa.String(length=50), nullable=True),
+    sa.Column('description', sa.String(length=20), nullable=True),
     sa.Column('composer', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('title')
+    sa.UniqueConstraint('image')
     )
     op.create_table('roles',
     sa.Column('id', sa.Integer(), nullable=False),
