@@ -49,8 +49,8 @@ def Productions():
             prod = Production(title=data.get('title'), genre=data.get('genre'), length=data.get('length'), year=data.get('year'), image=data.get('image'), language=data.get('language'), director=data.get('director'), description=data.get('description'), composer=data.get('composer') )
             db.session.add(prod)
             db.session.commit()
-        except Exception:
-            raise UnprocessableEntity('no')
+        except Exception as e:
+            raise UnprocessableEntity(str(e))
 
         dict = prod.to_dict()
         return make_response(jsonify(dict), 201)

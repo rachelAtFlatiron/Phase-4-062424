@@ -13,7 +13,7 @@ title: 05_client_server
 - run flask AND react at same time instead of opening up two different terminals:
 - `Procfile.dev` to create scripts making use of `honcho` and `gunicorn`
 
-- `gunicorn` Python WGI HTTP server
+- `gunicorn` Python WSGI HTTP server
 - `honcho`: manages Procfile applications
 - `Procfile`: a file that describes how to run your application even if the application is in multiple independent components 
 

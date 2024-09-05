@@ -7,8 +7,19 @@ function ProductionDetail() {
 	});
 
 	// 4a. fetch current production based on params
+	// params.id
+	const params = useParams()
+	
 	// 4c. if response is not ok, navigate to /not-found
-
+	useEffect(() => {
+		fetch(`http://127.0.0.1:5555/productions/${params.id}`)
+		.then(res => {
+			if(res.ok){
+				return res.json()
+			}
+		})
+		.then(data => setProduction(data))
+	}, [])
 
 	// 4b. destructure the values and display them on page
 	const { id, title, genre, image, description, director, length, composer } = production;

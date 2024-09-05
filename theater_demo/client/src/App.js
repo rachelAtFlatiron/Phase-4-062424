@@ -14,8 +14,31 @@ function App() {
 	const [productions, setProductions] = useState([]);
 	const [actors, setActors] = useState([]);
 
-	// 3a. create a useEffect to fetch from /productions and /actors
-	// 3b. save the result in state
+	useEffect(() => {
+
+		fetch("http://127.0.0.1:5555/productions")
+		.then(res => {
+			if(res.ok){
+				return res.json()
+			} else {
+				console.error("couldnt get all productions")
+			}
+		})
+		.then(data => setProductions(data))
+
+		fetch("http://127.0.0.1:5555/actors")
+		.then(res => {
+			if(res.ok){
+				return res.json()
+			} else {
+				console.error("couldnt get all actors")
+			}
+		})
+		.then(data => setActors(data))
+
+	}, [])
+
+	
 
 
 	const addProduction = (production) =>
@@ -32,12 +55,12 @@ function App() {
 				<Route path="/productions/:id" element={<ProductionDetail />} />
 
 				{/* 3c. pass productions here down  */}
-				<Route path="/productions" element={<ProductionContainer productions={[]} />} />
+				<Route path="/productions" element={<ProductionContainer productions={productions} />} />
 
 				<Route path="/actors/:id" element={<ActorDetail />} />
 
 				{/* 3c. pass actors here down  */}
-				<Route path="/actors" element={<ActorContainer actors={[]} />} />
+				<Route path="/actors" element={<ActorContainer actors={actors} />} />
 				<Route path="/not-found" element={<NotFound />} />
 
 				<Route exact path="/" element={<Home />} />
